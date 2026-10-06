@@ -2,13 +2,15 @@
 
 Documentation for the backend API behind Global Control, a CRM and marketing automation platform for agencies and their clients. The web app that talks to this API is documented in [Global-Control-Frontend](https://github.com/jsoftsol/Global-Control-Frontend).
 
-> **The source code is not included in this repository.** This is client work and the code is proprietary. This repo only holds documentation: this README and a reverse-engineered product spec ([PRD.md](PRD.md)). Everything here was written from a read-through of the actual codebase. Hostnames, credentials, endpoint details and security specifics are left out on purpose.
+> **The source code is not included in this repository.** This is client work and the code is proprietary. This repo only holds documentation: this README, a reverse-engineered product spec ([PRD.md](PRD.md)), and three diagrams in `screenshots/`. Everything here was written from a read-through of the actual codebase. Hostnames, credentials, endpoint details and security specifics are left out on purpose.
 
 ## What it does
 
 The server stores contacts, runs the automation around them, and sends the email and SMS. A contact gets tagged. A tag can start a workflow, which is a chain of steps such as send an email, wait, branch on a condition, add or remove tags, move the contact to another workflow, or call a third-party service. The server also runs broadcast email, sales pipelines, appointment booking, AI chat bots, engagement reporting, and the account structure agencies need to manage clients under their own brand.
 
 ## Architecture
+
+![System architecture](screenshots/architecture.svg)
 
 ```
 Frontend / external API users
@@ -29,6 +31,10 @@ Frontend / external API users
 - **Integration engine.** Third-party services are described in the database as integrations, triggers and actions, with request definitions that the server executes in a sandbox. Adding a new service does not need a code change for most cases.
 - **Multi-tenancy.** Accounts are separated by user ID. Agencies own client accounts, and white-label platforms and custom domains let clients see the product under the agency's brand.
 - **Storage.** MongoDB for application data, Redis for queues, S3-compatible object storage for images and newsletter assets.
+
+### How a tag runs a workflow
+
+![From a fired tag to a sent email](screenshots/workflow-flow.svg)
 
 ## Tech stack
 
@@ -62,6 +68,8 @@ Frontend / external API users
 - **AI-agent API.** A second API surface of about 117 routes, secured by an API key, that mirrors most of the product for automation by AI agents.
 
 ## Data model
+
+![Data model by domain](screenshots/data-model.svg)
 
 About 100 MongoDB collections, grouped by domain. Almost every record carries a `userId` and soft-delete fields. References are mostly stored as string IDs.
 
