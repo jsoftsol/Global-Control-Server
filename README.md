@@ -1,6 +1,6 @@
 # Global Control Server
 
-Documentation for the backend API behind Global Control, a CRM and marketing automation platform for agencies and their clients. The web app that talks to this API is documented in [Global-Control-Frontend](https://github.com/jsoftsol/Global-Control-Frontend).
+Documentation for the backend API behind Global Control, a CRM and marketing automation platform for agencies and their clients. The web app that talks to this API is documented in [Global-Control-Frontend](https://github.com/jsoftsol/Global-Control-Frontend), and the admin panel that manages it in [Global-Control-Admin](https://github.com/jsoftsol/Global-Control-Admin).
 
 > **The source code is not included in this repository.** This is client work and the code is proprietary. This repo only holds documentation: this README, a reverse-engineered product spec ([PRD.md](PRD.md)), and three diagrams in `screenshots/`. Everything here was written from a read-through of the actual codebase. Hostnames, credentials, endpoint details and security specifics are left out on purpose.
 
