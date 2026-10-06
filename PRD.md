@@ -38,7 +38,7 @@ Global Control Server is the engine behind a single platform for that work. It k
 - **Realtime.** Socket.IO with authenticated connections and per-user rooms.
 - **Agency features.** White-label platforms, custom domains, SSL issuance with queued jobs.
 - **Libraries.** Images, QR codes, rewards.
-- **Satellite processing.** Heavy jobs run on a separate deployment of the same codebase, configured as a satellite through its environment file. The main server hands it work over HTTP and the satellite runs it through the queues.
+- **Satellite processing.** Heavy jobs run on a separate deployment of the same codebase, configured as a satellite through its environment file. The main server hands it work over HTTP through a dedicated set of job routes, and the satellite runs it through the queues.
 
 ### 3.2 Scaffolded or partial
 
