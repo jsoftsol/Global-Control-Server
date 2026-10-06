@@ -38,7 +38,7 @@ Global Control Server is the engine behind a single platform for that work. It k
 - **Realtime.** Socket.IO with authenticated connections and per-user rooms.
 - **Agency features.** White-label platforms, custom domains, SSL issuance with queued jobs.
 - **Libraries.** Images, QR codes, rewards.
-- **Satellite processing.** Heavy jobs delegated to extra instances of the same app.
+- **Satellite processing.** Heavy jobs run on a separate deployment of the same codebase, configured as a satellite through its environment file. The main server hands it work over HTTP and the satellite runs it through the queues.
 
 ### 3.2 Scaffolded or partial
 
@@ -106,7 +106,7 @@ Global Control Server is the engine behind a single platform for that work. It k
 - **Throughput.** Queues run with high concurrency, and heavy work can move to satellite instances. One webhook log collection holds tens of millions of records according to the project's own notes.
 - **Reliability.** Unfinished tag and workflow tasks resume on restart. Webhook events that arrive early are held and retried.
 - **Observability.** Queue and conversation records act as an audit trail. There is no structured logging or error tracking.
-- **Deployment.** Node 20 under pm2 on a single production host, with a dev instance on another port. Crons run only on the production port.
+- **Deployment.** Node 20 under pm2. The main API runs on a production host with a dev instance beside it, and satellite deployments of the same code, set apart only by environment variables, handle queue work. Crons run only on the main production instance.
 - **Testing.** None automated.
 
 ## 6. Risks
@@ -120,7 +120,7 @@ Global Control Server is the engine behind a single platform for that work. It k
 | Code stored in the database | Integrations carry executable snippets run in a sandbox package that is no longer maintained | Maintenance and safety concerns |
 | Aging dependencies | Mongoose 6, AWS SDK v2, old JWT and upload libraries | Upgrade debt |
 | Dead code in the tree | Backup folders, old models, unused packages | Confusion about what is live |
-| Single production host | One server runs the API and its crons | Downtime and scaling limits |
+| Single main host | One server runs the API and all scheduled jobs, with satellite deployments for queue work | Downtime and scaling limits |
 | Always-200 responses | Errors travel in the body | Weak monitoring and misleading client behavior |
 
 ## 7. Open questions

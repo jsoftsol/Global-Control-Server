@@ -57,7 +57,7 @@
   <!-- Satellite -->
   <rect x="30" y="350" width="190" height="110" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
   <text x="125" y="378" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">Satellite servers</text>
-  <text x="125" y="402" text-anchor="middle" font-size="12" fill="#4c1d95">same codebase, heavy jobs:</text>
+  <text x="125" y="402" text-anchor="middle" font-size="12" fill="#4c1d95">same code, set by env file:</text>
   <text x="125" y="420" text-anchor="middle" font-size="12" fill="#4c1d95">broadcasts, tag fires, imports</text>
 
   <!-- External services -->
